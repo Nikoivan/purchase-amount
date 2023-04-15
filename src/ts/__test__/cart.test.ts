@@ -30,7 +30,7 @@ test("test for method add of class Cart", () => {
 });
 
 test("test for method getItems of class Cart", () => {
-  const result = cart.getItems();
+  const result = cart.items;
   expect(result).toEqual([
     {
       id: 111,
@@ -54,7 +54,7 @@ test("test for method getItems of class Cart", () => {
 });
 
 test("test for method totalAmount of class Cart", () => {
-  expect(cart.totalAmount()).toBe(2500);
+  expect(cart.amount).toBe(2500);
 });
 
 test("test for method discountTotalAmount", () => {
@@ -63,5 +63,5 @@ test("test for method discountTotalAmount", () => {
 
 test("test for method deleteItem", () => {
   cart.deleteItem(111);
-  expect(cart.items.length).toBe(1);
+  expect(cart._items.length).toBe(1);
 });

@@ -2,19 +2,19 @@ import Buyable from "../domain/buyable";
 import Movie from "../domain/movie";
 
 export default class Cart {
-  items: Buyable[] = [];
+  _items: Buyable[] = [];
 
   add(item: Buyable): void {
-    this.items.push(item);
+    this._items.push(item);
   }
 
-  totalAmount() {
-    const result = this.items.reduce((acc, item) => acc + item.price, 0);
+  get amount() {
+    const result = this._items.reduce((acc, item) => acc + item.price, 0);
     return result;
   }
 
   discountTotalAmount(discount: number) {
-    const result = this.totalAmount() * ((100 - discount) / 100);
+    const result = this.amount * ((100 - discount) / 100);
     /*if (result < 0) {
       return Math.abs(result);
     }    Посчитал, что возможно будет правильно приведение возможного значения к положительному*/
@@ -22,13 +22,13 @@ export default class Cart {
   }
 
   deleteItem(id: number): void {
-    const found = this.items.findIndex((item) => item.id === id);
+    const found = this._items.findIndex((item) => item.id === id);
     if (found !== -1) {
-      this.items.splice(found, 1);
+      this._items.splice(found, 1);
     }
   }
 
-  getItems(): Buyable[] {
-    return [...this.items];
+  get items(): Buyable[] {
+    return [...this._items];
   }
 }
