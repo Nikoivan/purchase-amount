@@ -8,12 +8,12 @@ export default class Cart {
     this._items.push(item);
   }
 
-  get amount() {
+  get amount(): number {
     const result = this._items.reduce((acc, item) => acc + item.price, 0);
     return result;
   }
 
-  discountTotalAmount(discount: number) {
+  discountTotalAmount(discount: number): number {
     const result = this.amount * ((100 - discount) / 100);
     /*if (result < 0) {
       return Math.abs(result);
