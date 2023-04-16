@@ -9,23 +9,18 @@ export default class Cart {
   }
 
   get amount(): number {
-    const result = this._items.reduce((acc, item) => acc + item.price, 0);
-    return result;
+    return this._items.reduce(
+      (acc: number, item: Buyable) => acc + item.price,
+      0
+    );
   }
 
   discountTotalAmount(discount: number): number {
-    const result = this.amount * ((100 - discount) / 100);
-    /*if (result < 0) {
-      return Math.abs(result);
-    }    Посчитал, что возможно будет правильно приведение возможного значения к положительному*/
-    return result;
+    return this.amount * ((100 - discount) / 100);
   }
 
   deleteItem(id: number): void {
-    const found = this._items.findIndex((item) => item.id === id);
-    if (found !== -1) {
-      this._items.splice(found, 1);
-    }
+    this._items = this._items.filter((item: Buyable) => item.id !== id);
   }
 
   get items(): Buyable[] {
